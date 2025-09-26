@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>HiSoft - Portfolio</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+			line-height: 1.6;
+			color: #3b3b3b;
+			overflow-x: hidden;
+		}
+
+		/* ナビゲーション */
+		nav {
+			position: fixed;
+			top: 0;
+			width: 100%;
+			background: rgba(255, 255, 255, 0.95);
+			backdrop-filter: blur(10px);
+			z-index: 1000;
+			padding: 1rem 0;
+			transition: all 0.3s ease;
+		}
+
+		nav.scrolled {
+			background: rgba(255, 255, 255, 0.98);
+			box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+		}
+
+		.nav-container {
+			max-width: 1200px;
+			margin: 0 auto;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 0 2rem;
+		}
+
+		.logo {
+			font-size: 1.5rem;
+			font-weight: bold;
+			color: #3b3b3b;
+		}
+
+		.nav-links {
+			display: flex;
+			list-style: none;
+			gap: 2rem;
+		}
+
+		.nav-links a {
+			text-decoration: none;
+			color: #3b3b3b;
+			transition: color 0.3s ease;
+			position: relative;
+		}
+
+		.nav-links a:hover {
+			color: #3498db;
+		}
+
+		.nav-links a::after {
+			content: '';
+			position: absolute;
+			bottom: -5px;
+			left: 0;
+			width: 0;
+			height: 2px;
+			background: #3498db;
+			transition: width 0.3s ease;
+		}
+
+		.nav-links a:hover::after {
+			width: 100%;
+		}
+
+
+		/* セクション共通スタイル */
+		section {
+			padding: 5rem 0;
+		}
+
+		.container {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 0 2rem;
+		}
+
+		.section-title {
+			text-align: center;
+			font-size: 2.5rem;
+			margin-bottom: 3rem;
+			color: #3b3b3b;
+			position: relative;
+		}
+		.section-title2 {
+			text-align: center;
+			font-size: 2.5rem;
+			margin-top: 3rem;
+			margin-bottom: 3rem;
+			color: #3b3b3b;
+			position: relative;
+		}
+
+		.section-title::after {
+			content: '';
+			position: absolute;
+			bottom: -10px;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 60px;
+			height: 3px;
+			background: #3498db;
+		}
+
+		/* Aboutセクション */
+		.about {
+			background: #ececec;
+		}
+
+		.about-content {
+			display: grid;
+			grid-template-columns: 1fr 2fr;
+			gap: 3rem;
+			align-items: center;
+		}
+
+		.about-text {
+			font-size: 1.1rem;
+			line-height: 1.8;
+		}
+
+		.profile-image {
+			width: 250px;
+			height: 250px;
+			border-radius: 50%;
+			/* background: linear-gradient(45deg, #3498db, #2c3e50); */
+			background-image: url("img/icon.jpg");
+			background-size: contain;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: white;
+			font-size: 4rem;
+			margin: 0 auto;
+			animation: pulse 2s ease-in-out infinite alternate;
+		}
+
+		/* Worksセクション */
+		.works-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+			gap: 2rem;
+			margin-top: 2rem;
+		}
+
+		.work-item {
+			background: white;
+			border-radius: 15px;
+			overflow: hidden;
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+			transition: all 0.3s ease;
+			cursor: pointer;
+		}
+
+		.work-item:hover {
+			transform: translateY(-10px);
+			box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+		}
+
+		.work-image {
+			position: relative;
+			width: 100%;
+			aspect-ratio: 16 / 9;   /* 比率を16:9に固定 */
+			overflow: hidden;
+			border-radius: 8px;
+			background: #eee;       /* 画像がない時の背景 */
+		}
+
+		.work-image img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;      /* 画像をトリミングして収める */
+			display: block;
+		}
+
+		.work-image::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: rgba(0, 0, 0, 0.2);
+			transition: opacity 0.3s ease;
+		}
+
+		.work-item:hover .work-image::before {
+			opacity: 0;
+		}
+
+		.work-content {
+			padding: 1.5rem;
+		}
+
+		.work-title {
+			font-size: 1.3rem;
+			margin-bottom: 0.5rem;
+			color: #2c3e50;
+		}
+
+		.work-description {
+			color: #666;
+			margin-bottom: 1rem;
+		}
+
+		.work-tech {
+			display: flex;
+			gap: 0.5rem;
+			flex-wrap: wrap;
+		}
+
+		.tech-tag {
+			background: #e3f2fd;
+			color: #1976d2;
+			padding: 0.3rem 0.8rem;
+			border-radius: 15px;
+			font-size: 0.8rem;
+		}
+
+		/* Contactセクション */
+		.contact {
+			background: #e6e6e6;
+		}
+
+		.contact-content {
+			text-align: center;
+		}
+
+		.contact-info {
+			display: flex;
+			justify-content: center;
+			gap: 3rem;
+			margin-top: 2rem;
+		}
+
+		.contact-item {
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+			font-size: 1.1rem;
+		}
+
+		.contact-icon {
+			width: 40px;
+			height: 40px;
+			background-image: url("img/cloud.ico");
+			background-size: contain;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.contact-item span a{
+			font-size: 1.0rem;
+			color: #3b3b3b;
+		}
+
+		.modal {
+			display: none;
+			position: fixed;
+			z-index: 2000;
+			left: 0; top: 0;
+			width: 100%; height: 100%;
+			background: rgba(0,0,0,0.6);
+			justify-content: center;
+			align-items: center;
+			padding: 1rem;
+		}
+		.modal h3 {
+			padding: 0.25em 0.5em 0.2em;/*上 左右 下の余白*/
+			background: transparent;/*背景透明に*/
+			border-left: solid 5px #3498db;/*左線*/
+		}
+		.modal p{
+			padding:1rem;
+		}
+		.modal-content {
+			position: relative;
+			background: #fff;
+			padding: 2rem;
+			border-radius: 12px;
+			max-width: 900px;
+			width: 90%;
+			max-height: 90vh;   /* 画面の90%まで */
+			overflow-y: auto;   /* 中身が溢れたらスクロール */
+			box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+			animation: fadeInUp .4s ease;
+		}
+
+		.modal .close {
+			position: absolute;
+			top: 15px; right: 20px;
+			font-size: 2rem;
+			cursor: pointer;
+			color: #333;
+		}
+
+		.modal-slider {
+			position: relative;
+			max-height: 80vh;   /* 画像が大きすぎないように制御 */
+			margin: 1rem 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.slides {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.slides img {
+			display: none;
+			max-width: auto;
+			max-height: 50vh; /* 画面の高さ80%まで */
+			object-fit: contain; /* 縦横比を崩さず収める */
+			cursor: zoom-in;
+		}
+
+		.slides img.active {
+			display: block;
+			width:auto;
+		}
+
+
+		.modal-slider button {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			background: rgba(0,0,0,0.5);
+			border: none;
+			color: white;
+			padding: 0.5rem 1rem;
+			cursor: pointer;
+			font-size: 1.5rem;
+			border-radius: 4px;
+	}
+
+		.modal-slider .prev { left: 10px; }
+		.modal-slider .next { right: 10px; }
+
+		.thumbnails {
+			display: flex;
+			justify-content: center;
+			gap: 1rem;
+			margin-top: 1rem;
+		}
+
+		.thumbnails img {
+			width: 100px;
+			height: 70px;
+			object-fit: cover;
+			cursor: pointer;
+			opacity: 0.6;
+			border-radius: 6px;
+			transition: all 0.3s ease;
+		}
+
+		.thumbnails img.active {
+			opacity: 1;
+			border: 2px solid #3498db;
+		}
+
+		/* 作品詳細説明エリア */
+		.work-detail-description {
+			margin-top: 1.5rem;
+			padding: 1rem;
+		}
+
+		.work-detail-description h4 {
+			margin: 0 0 1rem 0;
+			color: #2c3e50;
+			font-size: 1.1rem;
+			font-weight: 600;
+		}
+
+		.work-detail-description p {
+			margin: 0;
+			color: #555;
+			line-height: 1.7;
+			font-size: 0.95rem;
+		}
+
+
+		/* ライトボックス */
+			.lightbox {
+			display: none;
+			position: fixed;
+			z-index: 3000;
+			left: 0; top: 0;
+			width: 100%; height: 100%;
+			background: rgba(0,0,0,0.9);
+			justify-content: center;
+			align-items: center;
+		}
+
+		.lightbox img {
+			max-width: 90%;
+			max-height: 90%;
+			width: auto;
+			height: auto;
+			cursor: zoom-out; /* クリックで閉じられるのがわかる */
+			border-radius: 6px;
+			box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+		}
+
+		/* 閉じるボタン */
+		.close-lightbox {
+			position: absolute;
+			top: 20px;
+			right: 30px;
+			font-size: 2.5rem;
+			font-weight: bold;
+			color: #fff;
+			cursor: pointer;
+			z-index: 3100;
+		}
+		/* lightboxボタンのスタイル */
+		.lightbox-prev, .lightbox-next {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			background: rgba(0,0,0,0.7);
+			border: none;
+			color: white;
+			padding: 1rem 1.5rem;
+			cursor: pointer;
+			font-size: 2rem;
+			border-radius: 4px;
+			transition: background 0.3s ease;
+			z-index: 3200;
+		}
+
+		.lightbox-prev:hover, .lightbox-next:hover {
+			background: rgba(0,0,0,0.9);
+		}
+
+		.lightbox-prev {
+			left: 30px;
+		}
+
+		.lightbox-next {
+			right: 30px;
+		}
+
+
+		/* アニメーション */
+		@keyframes fadeInUp {
+			from {
+				opacity: 0;
+				transform: translateY(30px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		@keyframes float {
+			0%, 100% { transform: translateY(0px); }
+			50% { transform: translateY(-20px); }
+		}
+
+		@keyframes pulse {
+			from { box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.4); }
+			to { box-shadow: 0 0 0 20px rgba(52, 152, 219, 0); }
+		}
+
+		/* レスポンシブデザイン */
+		@media (max-width: 768px) {
+			.nav-links {
+				display: none;
+			}
+
+			.hero h1 {
+				font-size: 2.5rem;
+			}
+
+			.hero p {
+				font-size: 1.1rem;
+			}
+
+			.about-content {
+				grid-template-columns: 1fr;
+				text-align: center;
+			}
+
+			.works-grid {
+				grid-template-columns: 1fr;
+			}
+
+			.contact-info {
+				flex-direction: column;
+				gap: 1rem;
+			}
+
+			section {
+				padding: 3rem 0;
+			}
+
+			.container {
+				padding: 0 1rem;
+			}
+
+			/* モーダルのモバイル対応 */
+			.modal-content {
+				padding: 1rem;
+				margin: 0.5rem;
+				max-height: 95vh;
+				overflow-y: auto;
+			}
+
+			.modal-slider {
+				max-height: 35vh;
+			}
+
+			.slides img {
+				max-height: 30vh;
+				max-width: 80vw;
+			}
+
+			.thumbnails {
+				gap: 0.3rem;
+				flex-wrap: wrap;
+				overflow-x: auto;
+			}
+
+			.thumbnails img {
+				width: 60px;
+				height: 45px;
+				flex-shrink: 0;
+			}
+			.lightbox-prev, .lightbox-next {
+				padding: 0.8rem 1rem;
+				font-size: 1.5rem;
+			}
+
+			.lightbox-prev {
+				left: 15px;
+			}
+
+			.lightbox-next {
+				right: 15px;
+			}
+		}
+
+		/* スクロール時のアニメーション */
+		.fade-in {
+			opacity: 0;
+			transform: translateY(30px);
+			transition: all 0.6s ease;
+		}
+
+		.fade-in.visible {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	</style>
+	<link rel="icon" href="img/favicon.ico">
+</head>
+<body>
+	<!-- ナビゲーション -->
+	<nav id="navbar">
+		<div class="nav-container">
+			<div class="logo">Portfolio</div>
+			<ul class="nav-links">
+				<li><a href="#about">About</a></li>
+				<li><a href="#works">Works</a></li>
+				<li><a href="#contact">Contact</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<!-- Aboutセクション -->
+	<section id="about" class="about">
+		<div class="container">
+			<h2 class="section-title2 fade-in">About me</h2>
+			<div class="about-content fade-in">
+				<div class="profile-image"></div>
+				<div class="about-text">
+					<p>こんにちは、HiSoftです。現在二児(4歳と6歳)の父として育児や家事を行いながら、空いた時間にECサイトの商品画像制作や生成AIを使ったコンテンツ制作などを行っています。</p>
+					<br>
+					<p>これまでの経験で培ったWEBサイト運営・制作・ディレクション業務のスキルや、未経験の技術であっても積極的に取り入れて形にしてきたチャレンジ精神で、お客様のビジョンを現実に変えるお手伝いをさせていただければと思います。</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Worksセクション -->
+	<section id="works" class="works">
+		<div class="container">
+			<h2 class="section-title fade-in">Works</h2>
+			<div class="works-grid">
+
+				<div class="work-item fade-in"
+					data-images="img/raku1.jpg,img/raku2.jpg,img/raku3.jpg" 
+					data-detail="検索から商品ページへたどり着くというお客様が多い楽天市場では、商品ページは各ショップにおけるLPのようなニュアンスが強いため、「すぐに、直感的にわかりやすい」ページ作りを行っています。また商品の特徴にあわせて「派手」「かわいい」「クール」「おしゃれ」などのイメージになるようにレイアウトや文字装飾を工夫しています。\n\n※楽天市場では商品画像登録ガイドラインが改定されて以来、第1商品画像にはテキスト占有率の低いシンプルなものしか制作できなくなってしまいました。今回ポートフォリオには第一商品画像は掲載しておりませんが、規制の範囲内でも他店よりも「わかりやすく」を基本として「よりキレイに」「よりかっこよく」「よりスタイリッシュに」を心がけて画像制作を行っています。">
+					<div class="work-image"></div>
+					<div class="work-content">
+						<h3 class="work-title">楽天市場 商品ページ画像制作</h3>
+						<p class="work-description">楽天市場に出店しているショップの商品ページ画像を制作いたしました。</p>
+						<div class="work-tech">
+							<span class="tech-tag">Photoshop</span>
+							<span class="tech-tag">HTML</span>
+						</div>
+					</div>
+				</div>
+				<div class="work-item fade-in"
+				 data-images="img/ec1.jpg,img/ec2.jpg,img/ec3.jpg"
+				 data-detail="ネットショップ「ECカレント」の運営を行う中で\n■女子向け商品の販促ページ\n■季節の販促特集ページ\n■スポット商品の販促特集ページ\n■セールページ\nのような様々な商品企画ページを制作いたしました。">
+					<div class="work-image"></div>
+					<div class="work-content">
+						<h3 class="work-title">ECサイト 販売促進ページ制作</h3>
+						<p class="work-description">ネットショップ「ECカレント」の商品バナーや特集コーナーのページなどを制作いたしました。</p>
+						<div class="work-tech">
+							<span class="tech-tag">Photoshop</span>
+							<span class="tech-tag">HTML</span>
+							<span class="tech-tag">CSS</span>
+							<span class="tech-tag">JavaScript</span>
+						</div>
+					</div>
+				</div>
+				<div class="work-item fade-in"
+				 data-images="img/macheri01.jpg,img/macheri02.jpg,img/macheri03.jpg"
+				 data-detail="■ネイルサロン ma chérie(マ・シェリ)　<a href='http://macherie2015.com/' target='_blank' title='目黒区のネイルサロン ma chérie(マ・シェリ)'>http://macherie2015.com/</a>\nサロンオーナーさまとの打ち合わせにて必要な機能やサイトイメージをヒアリングし「落ち着いた雰囲気でスタイリッシュな感じのサイト」をコンセプトに制作しました。お客様がサイトを見た時にサロンでどんな種類のネイルができるのか直感的に分かるように、ネイルのサンプル画像をたくさん掲載できる仕様にいたしました。\n\nWordpressオリジナルテーマ（レスポンシブデザイン）にて制作。">
+					<div class="work-image"></div>
+					<div class="work-content">
+						<h3 class="work-title">ネイルサロンのホームページ制作</h3>
+						<p class="work-description">目黒区のネイルサロン「ma chérie(マ・シェリ)」のHPをWordpressのオリジナルテーマにて制作しました。（レスポンシブデザイン）</p>
+						<div class="work-tech">
+							<span class="tech-tag">WordPress</span>
+							<span class="tech-tag">Photoshop</span>
+							<span class="tech-tag">PHP</span>
+							<span class="tech-tag">HTML</span>
+							<span class="tech-tag">CSS</span>
+							<span class="tech-tag">jQuery</span>
+						</div>
+					</div>
+				</div>
+				<div class="work-item fade-in"
+				 data-images="img/kimi-kun01.jpg,img/kimi-kun02.jpg,img/kimi-kun03.jpg"
+				 data-detail="ペットのオカメインコをブログでかわいく発信していきたいというご依頼をいただき、「ポップでかわいい小鳥ブログ」をコンセプトに制作しました。オカメインコ（ルチノー種）のイメージカラーである黄色を基調としたデザインに、ヘッダーやフッター・メニューバーなどにオカメインコのイラストを配置することでサイト内をポップに演出。また、プレゼント企画でユーザーさまに配布する年賀状やポストカードなどの制作もやらせて頂きました。\n\nWordpressオリジナルテーマ（レスポンシブデザイン）にて制作。">
+					<div class="work-image"></div>
+					<div class="work-content">
+						<h3 class="work-title">個人のペットブログ制作</h3>
+						<p class="work-description">オカメインコの写真や動画を掲載できる個人ブログサイトをWordpressのオリジナルテーマにて制作しました。（レスポンシブデザイン）</p>
+						<div class="work-tech">
+							<span class="tech-tag">WordPress</span>
+							<span class="tech-tag">Photoshop</span>
+							<span class="tech-tag">PHP</span>
+							<span class="tech-tag">HTML</span>
+							<span class="tech-tag">CSS</span>
+							<span class="tech-tag">jQuery</span>
+						</div>
+					</div>
+				</div>
+				<div class="work-item fade-in"
+				 data-images="img/othehp2.jpg,img/othehp2-2.jpg"
+				 data-detail="「ロックでポップなフリーの音楽素材を探している方が直感的に目的の音楽を探せてすぐにダウンロードできるサイト」をコンセプトにして制作。無駄な要素を極力なくし、シンプルな構成で洗練されたデザインに仕上げました。">
+					<div class="work-image"></div>
+					<div class="work-content">
+						<h3 class="work-title">音楽素材サイト制作</h3>
+						<p class="work-description">音楽素材サイト「RoPoL」をWordPressテーマ「Luxeritas（ルクセリタス）」をカスタマイズして制作。</p>
+						<div class="work-tech">
+							<span class="tech-tag">WordPress</span>
+							<span class="tech-tag">Photoshop</span>
+							<span class="tech-tag">PHP</span>
+							<span class="tech-tag">HTML</span>
+							<span class="tech-tag">CSS</span>
+						</div>
+					</div>
+				</div>
+				<div class="work-item fade-in"
+				 data-images="img/othehp1.jpg,img/othehp1-2.jpg,img/othehp1-3.jpg"
+				 data-detail="CSSが使えない環境でしたのでHTML＋画像のみで制作いたしました。また、サイトに動きが欲しいとのご要望がありましたので、メニューボタンなど一部の画像をgifアニメーションで制作して配置しています。">
+					<div class="work-image"></div>
+					<div class="work-content">
+						<h3 class="work-title">Yahoo!ショッピング インク販売店のサイトデザイン</h3>
+						<p class="work-description">Yahoo!ショッピング内のインク販売店「インク宅配便」のサイトをデザイン・制作いたしました。</p>
+						<div class="work-tech">
+							<span class="tech-tag">Photoshop</span>
+							<span class="tech-tag">HTML</span>
+						</div>
+					</div>
+				</div>
+				<div class="work-item fade-in"
+				 data-images="img/tirasi.jpg,img/tirasi2.jpg,img/tirasi3.jpg"
+				 data-detail="■知人のバンドやミュージシャンのライブ告知で使用するフライヤーやロゴをデザイン・制作いたしました。ロゴは缶バッジやフラッグなどのグッズ制作にも使用して頂きました。\n■仮想通貨のホワイトペーパー(プロジェクトの企画・構想・内容・ロードマップなど記載した文書)を掲載した画像を制作。こちらのイラストには画像生成AI（Midjourney）を使用しました。（3枚目の画像のゴリラのイラスト）また、仮想通貨の中のあるトークンのステーキングについて分かりやすく紹介する画像を制作しました。（3枚目の画像の一番右）">
+					<div class="work-image"></div>
+					<div class="work-content">
+						<h3 class="work-title">フライヤーなどその他画像制作物</h3>
+						<p class="work-description">バンドのライブ告知や音楽イベントのフライヤー・仮想通貨のホワイトペーパーなどを制作しました。</p>
+						<div class="work-tech">
+							<span class="tech-tag">Photoshop</span>
+						</div>
+					</div>
+				</div>
+				<div class="work-item fade-in"
+				 data-images="img/othehp3.jpg"
+				 data-detail="「一人一人が得意とするものを融合して作品を創造する」というコンセプトを掲げる制作スタジオのサイトを制作。立ち上げ時だったためヒアリングだけでは活動内容や方針が漠然としていましたが、サンプルイメージやキャッチコピーなどを私の方から準備して打ち合わせを繰り返し、サイトの方向性を明確にする事ができました。">
+					<div class="work-image"></div>
+					<div class="work-content">
+						<h3 class="work-title">コンテンツ制作スタジオのウェブサイト制作</h3>
+						<p class="work-description">コンテンツ制作スタジオ「Ark Ballet Corporation」のウェブサイトをWordpressのオリジナルテーマにて制作。（レスポンシブデザイン）</p>
+						<div class="work-tech">
+							<span class="tech-tag">WordPress</span>
+							<span class="tech-tag">Photoshop</span>
+							<span class="tech-tag">PHP</span>
+							<span class="tech-tag">HTML</span>
+							<span class="tech-tag">CSS</span>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+
+
+	<!-- モーダル -->
+	<div id="work-modal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+
+			<h3 id="modal-title"></h3>
+			<p id="modal-description"></p>
+			<div id="modal-tech"></div>
+
+			<div class="modal-slider">
+				<button class="prev">&#10094;</button>
+				<div class="slides"></div>
+				<button class="next">&#10095;</button>
+			</div>
+
+			<!-- サムネイル -->
+			<div class="thumbnails"></div>
+			<div class="work-detail-description">
+				<p id="work-detail-text">作品の詳細説明</p>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- ライトボックス -->
+	<div id="lightbox" class="lightbox">
+		<span class="close-lightbox">&times;</span>
+		<button class="lightbox-prev">&#10094;</button>
+		<img id="lightbox-image" src="" alt="">
+		<button class="lightbox-next">&#10095;</button>
+	</div>
+
+
+    <!-- Contactセクション -->
+	<section id="contact" class="contact">
+		<div class="container">
+			<div class="contact-content">
+				<h2 class="section-title fade-in">Contact</h2>
+				<p class="fade-in">お仕事のご依頼やご相談がございましたら、お気軽にお声がけください。</p>
+				<div class="contact-info fade-in">
+					<div class="contact-item">
+						<div class="contact-icon"></div>
+						<span><a href="https://crowdworks.jp/public/employees/5155898" title="クラウドワークス">クラウドワークス</a></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+<!-- ここからJavaScript -->
+<script>
+	// スムーズスクロール
+	document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+		anchor.addEventListener('click', function (e) {
+			e.preventDefault();
+			const target = document.querySelector(this.getAttribute('href'));
+			if (target) {
+				target.scrollIntoView({
+					behavior: 'smooth',
+					block: 'start'
+				});
+			}
+		});
+	});
+
+	// ナビゲーションバーのスクロール効果
+	window.addEventListener('scroll', function() {
+		const navbar = document.getElementById('navbar');
+		if (window.scrollY > 100) {
+			navbar.classList.add('scrolled');
+		} else {
+			navbar.classList.remove('scrolled');
+		}
+	});
+
+	// スクロール時のフェードインアニメーション
+	const observerOptions = {
+		threshold: 0.1,
+		rootMargin: '0px 0px -50px 0px'
+	};
+
+	const observer = new IntersectionObserver(function(entries) {
+		entries.forEach(entry => {
+			if (entry.isIntersecting) {
+				entry.target.classList.add('visible');
+			}
+		});
+	}, observerOptions);
+
+	document.querySelectorAll('.fade-in').forEach(el => {
+		observer.observe(el);
+	});
+
+	// 作品アイテムのクリックイベント
+	document.querySelectorAll('.work-item').forEach(item => {
+		item.addEventListener('click', function() {
+			// ここで詳細ページへの遷移や詳細情報の表示などを実装
+			console.log('作品がクリックされました:', this.querySelector('.work-title').textContent);
+		});
+	});
+
+
+
+	const modal = document.getElementById('work-modal');
+	const slidesContainer = modal.querySelector('.slides');
+	const modalTitle = document.getElementById('modal-title');
+	const modalDescription = document.getElementById('modal-description');
+	const modalTech = document.getElementById('modal-tech');
+	const modalClose = modal.querySelector('.close');
+
+	let currentSlide = 0;
+	let slideImages = [];
+
+	// 1. ページ読み込み時に .work-image に data-images[0] を表示
+	document.querySelectorAll('.work-item').forEach(item => {
+		if (item.dataset.images) {
+			const images = item.dataset.images.split(',').map(src => src.trim());
+			if (images.length > 0) {
+				const workImageDiv = item.querySelector('.work-image');
+				if (workImageDiv) {
+					workImageDiv.innerHTML = `<img src="${images[0]}" alt="">`;
+				}
+			}
+		}
+	});
+
+	// 2. モーダル表示処理
+	document.querySelectorAll('.work-item').forEach(item => {
+		item.addEventListener('click', function() {
+			const title = this.querySelector('.work-title').textContent;
+			const description = this.querySelector('.work-description').textContent;
+			const techs = [...this.querySelectorAll('.tech-tag')].map(tag => tag.outerHTML).join(' ');
+			const workDetailText = document.getElementById('work-detail-text');
+			const detailText = this.dataset.detail || '詳細説明がありません。';
+
+			workDetailText.innerHTML = detailText.replace(/\\n/g, '<br>');
+
+			// data-images を配列化
+			const imageList = this.dataset.images ? this.dataset.images.split(',').map(src => src.trim()) : [];
+
+			// スライド生成
+			slidesContainer.innerHTML = imageList.map((src, i) =>
+				`<img src="${src}" class="${i === 0 ? 'active' : ''}">`
+			).join('');
+
+			// サムネイル生成
+			thumbnailsContainer.innerHTML = imageList.map((src, i) =>
+				`<img src="${src}" class="${i === 0 ? 'active' : ''}" data-index="${i}">`
+			).join('');
+
+			modalTitle.textContent = title;
+			modalDescription.textContent = description;
+			modalTech.innerHTML = techs;
+
+			currentSlide = 0;
+			modal.style.display = 'flex';
+		});
+	});
+
+
+	// スライド切り替え
+	function showSlide(index) {
+		const imgs = slidesContainer.querySelectorAll('img');
+		if (imgs.length === 0) return;
+		imgs.forEach(img => img.classList.remove('active'));
+		currentSlide = (index + imgs.length) % imgs.length;
+		imgs[currentSlide].classList.add('active');
+	}
+
+	modal.querySelector('.prev').addEventListener('click', () => showSlide(currentSlide - 1));
+	modal.querySelector('.next').addEventListener('click', () => showSlide(currentSlide + 1));
+
+	// 閉じる
+	modalClose.addEventListener('click', () => modal.style.display = 'none');
+	window.addEventListener('click', e => {
+	  if (e.target === modal) modal.style.display = 'none';
+	});
+
+	// ライトボックス要素
+	const lightbox = document.getElementById('lightbox');
+	const lightboxImage = document.getElementById('lightbox-image');
+	const closeLightbox = document.querySelector('.close-lightbox');
+
+	// モーダル内の画像クリックでライトボックスを開く
+	let lightboxCurrentIndex = 0;
+
+	slidesContainer.addEventListener('click', e => {
+		if (e.target.tagName === 'IMG') {
+			lightboxCurrentIndex = currentSlide;
+			lightboxImage.src = e.target.src;
+			lightbox.style.display = 'flex';
+		}
+	});
+
+	// ライトボックス内でのスライド機能
+	function showLightboxSlide(index) {
+		if (slideImages.length === 0) return;
+		lightboxCurrentIndex = (index + slideImages.length) % slideImages.length;
+		lightboxImage.src = slideImages[lightboxCurrentIndex];
+	}
+
+	// ライトボックスのボタンイベント
+	document.querySelector('.lightbox-prev').addEventListener('click', e => {
+		e.stopPropagation();
+		showLightboxSlide(lightboxCurrentIndex - 1);
+	});
+
+	document.querySelector('.lightbox-next').addEventListener('click', e => {
+		e.stopPropagation();
+		showLightboxSlide(lightboxCurrentIndex + 1);
+	});
+
+	// キーボード操作の追加
+	document.addEventListener('keydown', e => {
+		if (lightbox.style.display === 'flex') {
+			if (e.key === 'ArrowLeft') {
+				showLightboxSlide(lightboxCurrentIndex - 1);
+			} else if (e.key === 'ArrowRight') {
+				showLightboxSlide(lightboxCurrentIndex + 1);
+			} else if (e.key === 'Escape') {
+				lightbox.style.display = 'none';
+			}
+		}
+	});
+
+	// ×ボタンクリックで閉じる
+	closeLightbox.addEventListener('click', () => {
+		lightbox.style.display = 'none';
+	});
+
+	// ライトボックス画像クリックで閉じる
+	lightboxImage.addEventListener('click', () => {
+		lightbox.style.display = 'none';
+	});
+
+	// ライトボックス外クリックで閉じる
+	lightbox.addEventListener('click', e => {
+		if (e.target === lightbox) {
+			lightbox.style.display = 'none';
+		}
+	});
+
+
+	const thumbnailsContainer = modal.querySelector('.thumbnails');
+
+	// モーダルを開くときにサムネイルも生成
+	document.querySelectorAll('.work-item').forEach(item => {
+		item.addEventListener('click', function() {
+			const title = this.querySelector('.work-title').textContent;
+			const description = this.querySelector('.work-description').textContent;
+			const techs = [...this.querySelectorAll('.tech-tag')].map(tag => tag.outerHTML).join(' ');
+
+			slideImages = this.dataset.images ? this.dataset.images.split(',') : [];
+
+			slidesContainer.innerHTML = slideImages.map((src, i) =>
+				`<img src="${src.trim()}" class="${i === 0 ? 'active' : ''}">`
+			).join('');
+
+			thumbnailsContainer.innerHTML = slideImages.map((src, i) =>
+				`<img src="${src.trim()}" class="${i === 0 ? 'active' : ''}" data-index="${i}">`
+			).join('');
+
+			modalTitle.textContent = title;
+			modalDescription.textContent = description;
+			modalTech.innerHTML = techs;
+
+			currentSlide = 0;
+			modal.style.display = 'flex';
+		});
+	});
+
+	// サムネイルクリックでスライド切替
+	thumbnailsContainer.addEventListener('click', e => {
+		if (e.target.tagName === 'IMG') {
+			const index = parseInt(e.target.dataset.index, 10);
+			showSlide(index);
+		}
+	});
+
+	// showSlide を拡張してサムネイルも同期
+	function showSlide(index) {
+		const imgs = slidesContainer.querySelectorAll('img');
+		const thumbs = thumbnailsContainer.querySelectorAll('img');
+		if (imgs.length === 0) return;
+		imgs.forEach(img => img.classList.remove('active'));
+		thumbs.forEach(thumb => thumb.classList.remove('active'));
+
+		currentSlide = (index + imgs.length) % imgs.length;
+		imgs[currentSlide].classList.add('active');
+		thumbs[currentSlide].classList.add('active');
+	}
+
+    </script>
+</body>
+</html>
