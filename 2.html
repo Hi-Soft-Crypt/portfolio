@@ -131,15 +131,44 @@
 		}
 
 		.about-content {
-			display: grid;
-			grid-template-columns: 1fr 2fr;
-			gap: 3rem;
-			align-items: center;
+			text-align: center;
 		}
-
+		.about-img{
+			max-width: 700px;
+			margin: 0 auto;
+		}
 		.about-text {
 			font-size: 1.1rem;
 			line-height: 1.8;
+		}
+		.about-text-link {
+			margin-top:10px;
+			list-style: none;
+			gap: 2rem;
+		}
+
+		.about-text-link a {
+			text-decoration: none;
+			color: #3b3b3b;
+			transition: color 0.3s ease;
+		}
+
+		.about-text-link a:hover {
+			color: #3498db;
+		}
+
+		.about-text-link a::after {
+			content: '';
+			bottom: -5px;
+			left: 0;
+			width: 0;
+			height: 2px;
+			background: #3498db;
+			transition: width 0.3s ease;
+		}
+
+		.about-text-link a:hover::after {
+			width: 100%;
 		}
 
 		.profile-image {
@@ -156,6 +185,25 @@
 			font-size: 4rem;
 			margin: 0 auto;
 			animation: pulse 2s ease-in-out infinite alternate;
+		}
+
+		/* listzoneセクション */
+		.listzone {
+			background: #ececec;
+		}
+
+		.listzone-content {
+			margin-top:50px;
+			text-align: center;
+		}
+		.listzone-content ul li{
+			list-style:none;
+			display:inline;
+			margin-right:10px;
+		}
+		.listzone-text {
+			font-size: 1.1rem;
+			line-height: 1.8;
 		}
 
 		/* Worksセクション */
@@ -581,16 +629,15 @@
 		}
 	</style>
 	<link rel="icon" href="img/favicon.ico">
-</head>
-<body>
+</head><body>
 	<!-- ナビゲーション -->
 	<nav id="navbar">
 		<div class="nav-container">
 			<div class="logo"><a href="https://hi-soft-crypt.github.io/portfolio/">Portfolio</a></div>
 			<ul class="nav-links">
-				<li><a href="#about">About</a></li>
-				<li><a href="#works">Works</a></li>
-				<li><a href="#contact">Contact</a></li>
+				<li><a href="index.html#about">About</a></li>
+				<li><a href="index.html#works">Works</a></li>
+				<li><a href="index.html#contact">Contact</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -598,148 +645,36 @@
 	<!-- Aboutセクション -->
 	<section id="about" class="about">
 		<div class="container">
-			<h2 class="section-title2 fade-in">About me</h2>
+			<h2 class="section-title2 fade-in">シューズハンガー</h2>
 			<div class="about-content fade-in">
-				<div class="profile-image"></div>
-				<div class="about-text">
-					<p>こんにちは、HiSoftです。現在二児(4歳と6歳)の父として育児や家事を行いながら、空いた時間にECサイトの商品画像制作や生成AIを使ったコンテンツ制作などを行っています。</p>
-					<br>
-					<p>これまでの経験で培ったWEBサイト運営・制作・ディレクション業務のスキルや、未経験の技術であっても積極的に取り入れて形にしてきたチャレンジ精神で、お客様のビジョンを現実に変えるお手伝いをさせていただければと思います。</p>
+				<div class="about-img">
+					<p><img src="img/shueshunger_01.jpg" width="100%"></p>
+					<p><img src="img/shueshunger_02.jpg" width="100%"></p>
+					<p><img src="img/shueshunger_03.jpg" width="100%"></p>
+					<p><img src="img/shueshunger_04.jpg" width="100%"></p>
+				</div>
+			</div>
+			<div class="listzone-content fade-in">
+				<h3 class="section-title2 fade-in">他の商品ページデザイン</h3>
+				<div>
+					<ul>
+						<li><a href="1.html"><img src="img/head_p_sb55.jpg" width="15%"></a></li>
+						<li><a href="2.html"><img src="img/shueshunger_01.jpg" width="15%"></a></li>
+						<li><a href="3.html"><img src="img/head_selca04k.jpg" width="15%"></a></li>
+						<li><a href="4.html"><img src="img/svehunger_01.jpg" width="15%"></a></li>
+						<li><a href="5.html"><img src="img/jbellring1_01.jpg" width="15%"></a></li>
+						<li><a href="6.html"><img src="img/mgrisa_01.jpg" width="15%"></a></li>
+						<li><a href="7.html"><img src="img/sholdsilicons_01.jpg" width="15%"></a></li>
+						<li><a href="8.html"><img src="img/ec-biyou-s.jpg" width="15%"></a></li>
+						<li><a href="9.html"><img src="img/ec-tounyuu-s.jpg" width="15%"></a></li>
+						<li><a href="10.html"><img src="img/ec-walking-s.jpg" width="15%"></a></li>
+						<li><a href="11.html"><img src="img/ec-saeko-s.jpg" width="15%"></a></li>
+					</ul>
+					<p class="about-text-link"><a href="#about">ページ先頭へ</a></p>
 				</div>
 			</div>
 		</div>
 	</section>
-
-	<!-- Worksセクション -->
-	<section id="works" class="works">
-		<div class="container">
-			<h2 class="section-title fade-in">Works</h2>
-			<div class="works-grid">
-
-				<div class="work-item fade-in"
-					data-images="img/raku1.jpg,img/raku2.jpg,img/raku3.jpg" 
-					data-detail="検索から商品ページへたどり着くというお客様が多い楽天市場では、商品ページは各ショップにおけるLPのようなニュアンスが強いため、「すぐに、直感的にわかりやすい」ページ作りを行っています。また商品の特徴にあわせて「派手」「かわいい」「クール」「おしゃれ」などのイメージになるようにレイアウトや文字装飾を工夫しています。\n<a href='1.html'>商品ページの個別デザインはコチラ</a>\n\n\n※楽天市場では商品画像登録ガイドラインが改定されて以来、第1商品画像にはテキスト占有率の低いシンプルなものしか制作できなくなってしまいました。今回ポートフォリオには第一商品画像は掲載しておりませんが、規制の範囲内でも他店よりも「わかりやすく」を基本として「よりキレイに」「よりかっこよく」「よりスタイリッシュに」を心がけて画像制作を行っています。">
-					<div class="work-image"></div>
-					<div class="work-content">
-						<h3 class="work-title">楽天市場 商品ページ画像制作</h3>
-						<p class="work-description">楽天市場に出店しているショップの商品ページ画像を制作いたしました。</p>
-						<div class="work-tech">
-							<span class="tech-tag">Photoshop</span>
-							<span class="tech-tag">HTML</span>
-						</div>
-					</div>
-				</div>
-				<div class="work-item fade-in"
-				 data-images="img/ec1.jpg,img/ec2.jpg,img/ec3.jpg"
-				 data-detail="ネットショップ「ECカレント」の運営を行う中で\n■女子向け商品の販促ページ\n■季節の販促特集ページ\n■スポット商品の販促特集ページ\n■セールページ\nのような様々な商品企画ページを制作いたしました。">
-					<div class="work-image"></div>
-					<div class="work-content">
-						<h3 class="work-title">ECサイト 販売促進ページ制作</h3>
-						<p class="work-description">ネットショップ「ECカレント」の商品バナーや特集コーナーのページなどを制作いたしました。</p>
-						<div class="work-tech">
-							<span class="tech-tag">Photoshop</span>
-							<span class="tech-tag">HTML</span>
-							<span class="tech-tag">CSS</span>
-							<span class="tech-tag">JavaScript</span>
-						</div>
-					</div>
-				</div>
-				<div class="work-item fade-in"
-				 data-images="img/macheri01.jpg,img/macheri02.jpg,img/macheri03.jpg"
-				 data-detail="■ネイルサロン ma chérie(マ・シェリ)　<a href='http://macherie2015.com/' target='_blank' title='目黒区のネイルサロン ma chérie(マ・シェリ)'>http://macherie2015.com/</a>\nサロンオーナーさまとの打ち合わせにて必要な機能やサイトイメージをヒアリングし「落ち着いた雰囲気でスタイリッシュな感じのサイト」をコンセプトに制作しました。お客様がサイトを見た時にサロンでどんな種類のネイルができるのか直感的に分かるように、ネイルのサンプル画像をたくさん掲載できる仕様にいたしました。\n\nWordpressオリジナルテーマ（レスポンシブデザイン）にて制作。">
-					<div class="work-image"></div>
-					<div class="work-content">
-						<h3 class="work-title">ネイルサロンのホームページ制作</h3>
-						<p class="work-description">目黒区のネイルサロン「ma chérie(マ・シェリ)」のHPをWordpressのオリジナルテーマにて制作しました。（レスポンシブデザイン）</p>
-						<div class="work-tech">
-							<span class="tech-tag">WordPress</span>
-							<span class="tech-tag">Photoshop</span>
-							<span class="tech-tag">PHP</span>
-							<span class="tech-tag">HTML</span>
-							<span class="tech-tag">CSS</span>
-							<span class="tech-tag">jQuery</span>
-						</div>
-					</div>
-				</div>
-				<div class="work-item fade-in"
-				 data-images="img/kimi-kun01.jpg,img/kimi-kun02.jpg,img/kimi-kun03.jpg"
-				 data-detail="ペットのオカメインコをブログでかわいく発信していきたいというご依頼をいただき、「ポップでかわいい小鳥ブログ」をコンセプトに制作しました。オカメインコ（ルチノー種）のイメージカラーである黄色を基調としたデザインに、ヘッダーやフッター・メニューバーなどにオカメインコのイラストを配置することでサイト内をポップに演出。また、プレゼント企画でユーザーさまに配布する年賀状やポストカードなどの制作もやらせて頂きました。\n\nWordpressオリジナルテーマ（レスポンシブデザイン）にて制作。">
-					<div class="work-image"></div>
-					<div class="work-content">
-						<h3 class="work-title">個人のペットブログ制作</h3>
-						<p class="work-description">オカメインコの写真や動画を掲載できる個人ブログサイトをWordpressのオリジナルテーマにて制作しました。（レスポンシブデザイン）</p>
-						<div class="work-tech">
-							<span class="tech-tag">WordPress</span>
-							<span class="tech-tag">Photoshop</span>
-							<span class="tech-tag">PHP</span>
-							<span class="tech-tag">HTML</span>
-							<span class="tech-tag">CSS</span>
-							<span class="tech-tag">jQuery</span>
-						</div>
-					</div>
-				</div>
-				<div class="work-item fade-in"
-				 data-images="img/othehp2.jpg,img/othehp2-2.jpg"
-				 data-detail="「ロックでポップなフリーの音楽素材を探している方が直感的に目的の音楽を探せてすぐにダウンロードできるサイト」をコンセプトにして制作。無駄な要素を極力なくし、シンプルな構成で洗練されたデザインに仕上げました。">
-					<div class="work-image"></div>
-					<div class="work-content">
-						<h3 class="work-title">音楽素材サイト制作</h3>
-						<p class="work-description">音楽素材サイト「RoPoL」をWordPressテーマ「Luxeritas（ルクセリタス）」をカスタマイズして制作。</p>
-						<div class="work-tech">
-							<span class="tech-tag">WordPress</span>
-							<span class="tech-tag">Photoshop</span>
-							<span class="tech-tag">PHP</span>
-							<span class="tech-tag">HTML</span>
-							<span class="tech-tag">CSS</span>
-						</div>
-					</div>
-				</div>
-				<div class="work-item fade-in"
-				 data-images="img/othehp1.jpg,img/othehp1-2.jpg,img/othehp1-3.jpg"
-				 data-detail="CSSが使えない環境でしたのでHTML＋画像のみで制作いたしました。また、サイトに動きが欲しいとのご要望がありましたので、メニューボタンなど一部の画像をgifアニメーションで制作して配置しています。">
-					<div class="work-image"></div>
-					<div class="work-content">
-						<h3 class="work-title">Yahoo!ショッピング インク販売店のサイトデザイン</h3>
-						<p class="work-description">Yahoo!ショッピング内のインク販売店「インク宅配便」のサイトをデザイン・制作いたしました。</p>
-						<div class="work-tech">
-							<span class="tech-tag">Photoshop</span>
-							<span class="tech-tag">HTML</span>
-						</div>
-					</div>
-				</div>
-				<div class="work-item fade-in"
-				 data-images="img/tirasi.jpg,img/tirasi2.jpg,img/tirasi3.jpg"
-				 data-detail="■知人のバンドやミュージシャンのライブ告知で使用するフライヤーやロゴをデザイン・制作いたしました。ロゴは缶バッジやフラッグなどのグッズ制作にも使用して頂きました。\n■仮想通貨のホワイトペーパー(プロジェクトの企画・構想・内容・ロードマップなど記載した文書)を掲載した画像を制作。こちらのイラストには画像生成AI（Midjourney）を使用しました。（3枚目の画像のゴリラのイラスト）また、仮想通貨の中のあるトークンのステーキングについて分かりやすく紹介する画像を制作しました。（3枚目の画像の一番右）">
-					<div class="work-image"></div>
-					<div class="work-content">
-						<h3 class="work-title">フライヤーなどその他画像制作物</h3>
-						<p class="work-description">バンドのライブ告知や音楽イベントのフライヤー・仮想通貨のホワイトペーパーなどを制作しました。</p>
-						<div class="work-tech">
-							<span class="tech-tag">Photoshop</span>
-						</div>
-					</div>
-				</div>
-				<div class="work-item fade-in"
-				 data-images="img/othehp3.jpg"
-				 data-detail="「一人一人が得意とするものを融合して作品を創造する」というコンセプトを掲げる制作スタジオのサイトを制作。立ち上げ時だったためヒアリングだけでは活動内容や方針が漠然としていましたが、サンプルイメージやキャッチコピーなどを私の方から準備して打ち合わせを繰り返し、サイトの方向性を明確にする事ができました。">
-					<div class="work-image"></div>
-					<div class="work-content">
-						<h3 class="work-title">コンテンツ制作スタジオのウェブサイト制作</h3>
-						<p class="work-description">コンテンツ制作スタジオ「Ark Ballet Corporation」のウェブサイトをWordpressのオリジナルテーマにて制作。（レスポンシブデザイン）</p>
-						<div class="work-tech">
-							<span class="tech-tag">WordPress</span>
-							<span class="tech-tag">Photoshop</span>
-							<span class="tech-tag">PHP</span>
-							<span class="tech-tag">HTML</span>
-							<span class="tech-tag">CSS</span>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</section>
-
 
 
 	<!-- モーダル -->
